@@ -5,7 +5,6 @@ import Accelerometre from './myComponents/Accelerometer/Accelerometer'
 
 export default function App() {
 
-
   return (
     <View style={styles.container}>
       <Text>Zinzin Jump</Text>

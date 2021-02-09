@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 import Player from '../Player/Player'
@@ -12,7 +12,6 @@ export default function App() {
         z: 0,
         });
 
-    
     Accelerometer.setUpdateInterval(16);
     Accelerometer.addListener(accelerometerData => {
         setData(accelerometerData);
@@ -26,7 +25,7 @@ export default function App() {
     <View style={styles.container}>
         <Text>Accelerometre</Text>
         <Text style={styles.text}>
-          x: {Math.round(x)} y: {Math.round(y)} z: {Math.round(z)}
+          x: {x} y: {Math.round(y)} z: {Math.round(z)}
         </Text>
         <Player />
         <StatusBar style="auto"/>
@@ -36,9 +35,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+
   },
 });
