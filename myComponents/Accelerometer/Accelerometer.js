@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
-import Player from '../Player/Player'
+import Player from '../Player/Player';
+import Platform from '../Platform/Platform'
 
 export default function App() {
 
@@ -25,9 +26,10 @@ export default function App() {
     <View style={styles.container}>
         <Text>Accelerometre</Text>
         <Text style={styles.text}>
-          x: {x} y: {Math.round(y)} z: {Math.round(z)}
+          x: {x} 
         </Text>
         <Player />
+        <Platform />
         <StatusBar style="auto"/>
     </View>
     );
