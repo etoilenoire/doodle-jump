@@ -7,7 +7,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Zinzin Jump</Text>
+      <Text>Zinzi Jump</Text>
       <Accelerometre />
       <StatusBar style="auto"/>
     </View>
