@@ -12,8 +12,8 @@ export default function Accele() {
     const gravity = 3
     const widthPlat = 100
     const heightPlat = 20
-    const marginBottomPlat = 100
-    const marginLeftPlat = 50
+    const marginBottomPlat = [100, 200]
+    const marginLeftPlat = [50, 190]
 
     function gameOver(){
         alert('You Lose !')
@@ -52,10 +52,13 @@ export default function Accele() {
                     // appelle de la fonction Jump
                     isJump(jump)
                     // COllISION CHECK
-                    if(bottomPlayer - 20 < marginBottomPlat +2 && 
-                        bottomPlayer - 20 > marginBottomPlat - 2 && (175 + -x*200) > marginLeftPlat && (175 + -x*200)< marginLeftPlat + widthPlat ){
+                    for(let i = 0; i < marginBottomPlat.length; i++){ // pour toute les platformes repertiorier dans le tableau marginBottomPlat
+                        if(bottomPlayer - 20 < marginBottomPlat[i] +2 && bottomPlayer - 20 > marginBottomPlat[i] - 2 
+                            && (175 + -x*200) > marginLeftPlat[i] && (175 + -x*200)< marginLeftPlat[i] + widthPlat ){
                         setJump(!jump) // Si la collision est validé jump passe a true 
+                        }
                     }
+                    
                 },30)// Toutes les 30 ms 
                 return()=> {
                     clearInterval(gameTimerPlayer)
@@ -69,6 +72,15 @@ export default function Accele() {
 
 
     //PLATFORM
+        // Platform Set Up <- Affichage dynamique
+        var platform = [];
+
+        for(let i = 0; i < marginBottomPlat.length; i++){
+            platform.push(
+                <View key = {i} style={styles.platform,{ position: 'absolute',  backgroundColor: 'green', height: heightPlat, width: widthPlat, zIndex: 1, marginBottom: marginBottomPlat[i], marginLeft: marginLeftPlat[i]} }> 
+            </View>
+            )
+        }
 
 
         
@@ -76,8 +88,7 @@ export default function Accele() {
         <View style={styles.gameContainer, { backgroundColor: 'grey', height: screenHeight - screenHeight/3, width: screenWidth, zIndex: 0, display: 'flex', flexDirection: 'column-reverse'}} >  
             <View style={styles.player,{marginLeft : 175 + -x*200, marginBottom: bottomPlayer, position: 'absolute',  backgroundColor: 'pink', height: 20, width: 20, zIndex: 1}}> 
             </View>
-            <View style={styles.platform,{ position: 'absolute',  backgroundColor: 'green', height: heightPlat, width: widthPlat, zIndex: 1, marginBottom: marginBottomPlat, marginLeft: marginLeftPlat} }> 
-            </View>
+            {platform}
             <StatusBar style="auto"/>
         </View>
     );
