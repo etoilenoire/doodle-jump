@@ -19,7 +19,6 @@ export default function Accele() {
     const { x, y, z } = data;
 
     // PLATFORM
-
     // PLAYER
 
 
