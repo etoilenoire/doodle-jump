@@ -28,7 +28,6 @@ export default function Accele() {
     const { x, y, z } = data;
 
     // PLATFORM
-
     // PLAYER
     const [bottomPlayer, setbottomPlayer] = useState(screenHeight / 2);
         // Falling - Jump
