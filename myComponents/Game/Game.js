@@ -14,7 +14,12 @@ export default function Game() {
     const [marginBottomPlat, setmarginBottomPlat] = useState([100, 170, 220,300, 340, 450, 510, 20]) // Initialisation des coordonnées de toutes les platformes
     const marginLeftPlat = [50, 190, 280, 10, 200, 300, 190, 70] // Initialisation des coordonnées de toutes les platformes
     const [score, setScore] = useState(0)
-  
+    
+    const widthEnnemy = 20
+    const heightEnnemy = 20
+    const [marginBottomEnnemy, setmarginBottomEnnemy] = useState([150])
+    const marginLeftEnnemy = [100]
+
 
     function gameOver(){
         alert('You Lose !')
@@ -40,6 +45,7 @@ export default function Game() {
     // PLAYER
     const [jump, setJump] = useState(false)
     const [bottomPlayer, setbottomPlayer] = useState(screenHeight / 3);
+
 
         // Jump
         function isJump(isjump) { //fonction isJump avec jump en paramétre 
@@ -82,6 +88,21 @@ export default function Game() {
             </View>
             )
         }
+
+
+        // Ennemy
+        var ennemy = [];
+
+        for(let i = 0; i < marginBottomEnnemy.length; i++){
+            ennemy.push(
+                <View key = {i} style={styles.ennemy,{ position: 'absolute', backgroundColor: 'red', height: 20, width: 20, marginBottom: marginBottomEnnemy[i], marginLeft: marginLeftEnnemy[i]}}>
+
+                </View>
+
+            )
+        }
+    
+
 
         // Mouv Platforme
         function movePlat() {
