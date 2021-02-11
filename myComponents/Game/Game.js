@@ -1,8 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
-
 
 export default function Game() {
     // GLOBALE
@@ -14,6 +13,8 @@ export default function Game() {
     const pousse = 7
     const [marginBottomPlat, setmarginBottomPlat] = useState([100, 170, 220,300, 340, 450, 510, 20]) // Initialisation des coordonnées de toutes les platformes
     const marginLeftPlat = [50, 190, 280, 10, 200, 300, 190, 70] // Initialisation des coordonnées de toutes les platformes
+    const [score, setScore] = useState(0)
+  
 
     function gameOver(){
         alert('You Lose !')
@@ -22,6 +23,7 @@ export default function Game() {
     function dificulty() {
         // setTimeout(function(){ setGravity(gravity + 1) }, 1000); // toute les secondes la gravité est de plus en plus forte 
     }
+
 
     // ACCELEROMETRE
     const [data, setData] = useState({
@@ -87,6 +89,7 @@ export default function Game() {
                 marginBottomPlat[i] = marginBottomPlat[i] - 100
                 if(marginBottomPlat[i] < 0){
                     marginBottomPlat[i] = 500 + marginBottomPlat[i]
+                    setScore(score => score + 1)
                 }
             }
         }
@@ -98,15 +101,22 @@ export default function Game() {
                     && (175 + -x*200) > marginLeftPlat[i] && (175 + -x*200)< marginLeftPlat[i] + widthPlat ){
                     setJump(!jump) // Si la collision est validé jump passe a true 
                     movePlat() // Appelle de la fonction qui fait dessendre les platformes
+                    
                 }
             }
         }
     
 
 
-    
+        
     return (
-        <View style={styles.gameContainer, { backgroundColor: 'grey', height: screenHeight - screenHeight/3, width: screenWidth, zIndex: 0, display: 'flex', flexDirection: 'column-reverse'}} >  
+        
+        <View
+          style={styles.gameContainer, { backgroundColor: 'grey', height: screenHeight - screenHeight/3, width: screenWidth, zIndex: 0, display: 'flex', flexDirection: 'column-reverse'}} >
+              
+              <Text>{score}</Text>
+              
+                
             <View style={styles.player,{marginLeft : 175 + -x*200, marginBottom: bottomPlayer, position: 'absolute',  backgroundColor: 'pink', height: 20, width: 20}}> 
             </View>
             {platform}
