@@ -18,7 +18,7 @@ export default function App() {
     <Stack.Navigator>
 
     <Stack.Screen
-            name="Menu"
+            name="Zinzi Jump"
             component={Menu}
           />
 

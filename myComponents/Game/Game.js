@@ -6,6 +6,7 @@ import { Accelerometer } from 'expo-sensors';
 // ASSETS
 import imgPlayer from '../../assets/ZinZinPlayer.png'
 import imgBg from '../../assets/bgSpace.jpg'
+import imgPlat from '../../assets/meteorite.png'
 
 export default function Game() {
     // GLOBALE
@@ -21,15 +22,14 @@ export default function Game() {
     
     const widthEnnemy = 20
     const heightEnnemy = 20
-    
-    // genération d'une valeur aléatoire depuis la l'array items
-const getRandomSeq = () => {
-	const items = [150, 220, 300, 100, 170, 220 ]
-	return items[parseInt(Math.random()* items.length)]
-}
+    const [marginBottomEnnemy, setmarginBottomEnnemy] = useState([150, 220, 300])
+    const marginLeftEnnemy = [100, 170, 220]
 
-var [marginBottomEnnemy, setmarginBottomEnnemy] = useState([150, 220, 300])
-    var marginLeftEnnemy = [100, 170, 220]
+    // genération d'une valeur aléatoire depuis la l'array items
+    const getRandomSeq = () => {
+        const items = [150, 220, 300, 100, 170, 220 ]
+        return items[parseInt(Math.random()* items.length)]
+    }
 
 
     function gameOver(){
@@ -96,7 +96,8 @@ var [marginBottomEnnemy, setmarginBottomEnnemy] = useState([150, 220, 300])
 
         for(let i = 0; i < marginBottomPlat.length; i++){
             platform.push(
-                <View key = {i} style={styles.platform,{ position: 'absolute',  backgroundColor: 'green', height: heightPlat, width: widthPlat, zIndex: 1, marginBottom: marginBottomPlat[i], marginLeft: marginLeftPlat[i]} }> 
+                <View key = {i} style={styles.platform,{ position: 'absolute', height: heightPlat, width: widthPlat, zIndex: 1, marginBottom: marginBottomPlat[i], marginLeft: marginLeftPlat[i]} }> 
+                <Image source={imgPlat} style={styles.ImgPlayer,{position: 'relative', height: heightPlat, width: widthPlat}} />
             </View>
             )
         }
@@ -144,8 +145,7 @@ var [marginBottomEnnemy, setmarginBottomEnnemy] = useState([150, 220, 300])
             for(let i = 0; i < marginBottomEnnemy.length; i++){ // pour toute les platformes repertiorier dans le tableau marginBottomPlat
                 if(bottomPlayer - 20 < marginBottomEnnemy[i] +2 && bottomPlayer - 20 > marginBottomEnnemy[i] - 2 
                     && (175 + -x*200) > marginLeftEnnemy[i] && (175 + -x*200)< marginLeftEnnemy[i] + widthEnnemy ){
-                    gameOver()
-                    
+                    gameOver() 
                 }
             }
         }
@@ -156,12 +156,12 @@ var [marginBottomEnnemy, setmarginBottomEnnemy] = useState([150, 220, 300])
     return (
         <View style={styles.gameContainer, { height: screenHeight - screenHeight/5, width: screenWidth, zIndex: 0, display: 'flex', flexDirection: 'column-reverse'}} >
             <Image source={imgBg} style={styles.ImgBg,{position: 'relative', height: screenHeight - screenHeight/5, width: screenWidth}}  />
-            <Text>{score}</Text>
             <View style={styles.player,{marginLeft : 175 + -x*200, marginBottom: bottomPlayer, position: 'absolute', height: 30, width: 30}}> 
                 <Image source={imgPlayer} style={styles.ImgPlayer,{position: 'relative', height: 30, width: 30}} />
             </View>
             {platform}
             {ennemy}
+            <Text style={styles.score,{zIndex: 10, color: 'white', position: 'absolute'}}>Score : {score}</Text>
             <StatusBar style="auto"/>
         </View>
     );

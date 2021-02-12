@@ -1,14 +1,16 @@
 import React from 'react'
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Dimensions } from "react-native";
 
 
 class Credits extends React.Component {
     render(){
+      const screenWidth = Dimensions.get('screen').width
+      const screenHeight = Dimensions.get('screen').height
       return (
       
-        <View>
+        <View style={{display: 'flex', justifyContent: 'center', alignItems:'center', marginTop: screenHeight/3}}>
 
-        <Text>CREDITS</Text>
+        <Text>Options</Text>
            
         
         <Button
