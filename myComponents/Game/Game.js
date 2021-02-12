@@ -21,8 +21,15 @@ export default function Game() {
     
     const widthEnnemy = 20
     const heightEnnemy = 20
-    const [marginBottomEnnemy, setmarginBottomEnnemy] = useState([150])
-    const marginLeftEnnemy = [100]
+    
+    // genération d'une valeur aléatoire depuis la l'array items
+const getRandomSeq = () => {
+	const items = [150, 220, 300, 100, 170, 220 ]
+	return items[parseInt(Math.random()* items.length)]
+}
+
+var [marginBottomEnnemy, setmarginBottomEnnemy] = useState([150, 220, 300])
+    var marginLeftEnnemy = [100, 170, 220]
 
 
     function gameOver(){
@@ -69,6 +76,7 @@ export default function Game() {
                     isJump(jump)
                     // COllISION CHECK
                     collisionCheck()
+                    hitCheck()
                     dificulty()
                     
                 },20)// Toutes les 30 ms 
@@ -99,7 +107,7 @@ export default function Game() {
 
         for(let i = 0; i < marginBottomEnnemy.length; i++){
             ennemy.push(
-                <View key = {i} style={styles.ennemy,{ position: 'absolute', backgroundColor: 'red', height: 20, width: 20, marginBottom: marginBottomEnnemy[i], marginLeft: marginLeftEnnemy[i]}}>
+                <View key = {i} style={styles.ennemy,{ position: 'absolute', backgroundColor: 'red', height: heightEnnemy, width: widthEnnemy, marginBottom: marginBottomEnnemy[i], marginLeft: marginLeftEnnemy[i]}}>
 
                 </View>
 
@@ -130,6 +138,17 @@ export default function Game() {
                 }
             }
         }
+
+        // Hit check
+        function hitCheck() {
+            for(let i = 0; i < marginBottomEnnemy.length; i++){ // pour toute les platformes repertiorier dans le tableau marginBottomPlat
+                if(bottomPlayer - 20 < marginBottomEnnemy[i] +2 && bottomPlayer - 20 > marginBottomEnnemy[i] - 2 
+                    && (175 + -x*200) > marginLeftEnnemy[i] && (175 + -x*200)< marginLeftEnnemy[i] + widthEnnemy ){
+                    gameOver()
+                    
+                }
+            }
+        }
     
 
 
@@ -142,6 +161,7 @@ export default function Game() {
                 <Image source={imgPlayer} style={styles.ImgPlayer,{position: 'relative', height: 30, width: 30}} />
             </View>
             {platform}
+            {ennemy}
             <StatusBar style="auto"/>
         </View>
     );
