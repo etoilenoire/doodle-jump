@@ -1,7 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, Image } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
+
+// ASSETS
+import imgPlayer from '../../assets/ZinZinPlayer.png'
+import imgBg from '../../assets/bgSpace.jpg'
 
 export default function Game() {
     // GLOBALE
@@ -131,14 +135,11 @@ export default function Game() {
 
         
     return (
-        
-        <View
-          style={styles.gameContainer, { backgroundColor: 'grey', height: screenHeight - screenHeight/3, width: screenWidth, zIndex: 0, display: 'flex', flexDirection: 'column-reverse'}} >
-              
-              <Text>{score}</Text>
-              
-                
-            <View style={styles.player,{marginLeft : 175 + -x*200, marginBottom: bottomPlayer, position: 'absolute',  backgroundColor: 'pink', height: 20, width: 20}}> 
+        <View style={styles.gameContainer, { height: screenHeight - screenHeight/5, width: screenWidth, zIndex: 0, display: 'flex', flexDirection: 'column-reverse'}} >
+            <Image source={imgBg} style={styles.ImgBg,{position: 'relative', height: screenHeight - screenHeight/5, width: screenWidth}}  />
+            <Text>{score}</Text>
+            <View style={styles.player,{marginLeft : 175 + -x*200, marginBottom: bottomPlayer, position: 'absolute', height: 30, width: 30}}> 
+                <Image source={imgPlayer} style={styles.ImgPlayer,{position: 'relative', height: 30, width: 30}} />
             </View>
             {platform}
             <StatusBar style="auto"/>
